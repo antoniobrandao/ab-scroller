@@ -16,14 +16,16 @@ function ABScroller(options)
         element: null,
         drag_distance_limit: 30,
         orientation: 'vertical',
+        preventDefault: false,
+        stopPropagation: false,
     };
 
     this.touchListeners     = [];
     this.activated          = false;
-	this.invert_direction   = false;
+    this.invert_direction   = false;
 
-	this.current_position   = 0;
-	this.dragTickInterval   = null;
+    this.current_position   = 0;
+    this.dragTickInterval   = null;
 
     this.settings = this.extend(this.settings, options);
 }
@@ -54,27 +56,27 @@ ABScroller.prototype.initVertical = function initVertical()
 
     var processTick = function()
     {
-    	if (self.settings.orientation === 'vertical') {
-        	element.style.transform = 'translate3d(0px, ' + self.current_position + 'px, 0px)';
-	    } else if (self.settings.orientation === 'horizontal') {
-	        element.style.transform = 'translate3d(' + self.current_position + 'px, 0px, 0px)';
-	    }
+        if (self.settings.orientation === 'vertical') {
+            element.style.transform = 'translate3d(0px, ' + self.current_position + 'px, 0px)';
+        } else if (self.settings.orientation === 'horizontal') {
+            element.style.transform = 'translate3d(' + self.current_position + 'px, 0px, 0px)';
+        }
     }
 
     var touchStart = function(e)
     {
-        e.preventDefault();
-        e.stopPropagation();
-
+        if (self.settings.preventDefault) { e.preventDefault(); };
+        if (self.settings.stopPropagation) { e.stopPropagation(); };
+        
         diff_position  = 0;
         start_position = e.targetTouches[0][direction_property];
         self.dragTickInterval = setInterval(processTick, 100);
     }
     var touchMove = function(e)
     {
-        e.preventDefault();
-        e.stopPropagation();
-
+        if (self.settings.preventDefault) { e.preventDefault(); };
+        if (self.settings.stopPropagation) { e.stopPropagation(); };
+        
         self.current_position = e.targetTouches[0][direction_property];
         diff_position = -(start_position - self.current_position);
 
@@ -84,27 +86,27 @@ ABScroller.prototype.initVertical = function initVertical()
         var new_y = start_value + diff_position;
 
         if (new_y > self.settings.drag_distance_limit) {
-        	new_y = self.settings.drag_distance_limit
+            new_y = self.settings.drag_distance_limit
         };
         if (new_y < -scroll_height_diff-self.settings.drag_distance_limit) {
-        	new_y = -scroll_height_diff-self.settings.drag_distance_limit
+            new_y = -scroll_height_diff-self.settings.drag_distance_limit
         };
 
         self.current_position = new_y;
     }
     var touchEnd = function(e)
     {
-        e.preventDefault();
-        e.stopPropagation();
-
+        if (self.settings.preventDefault) { e.preventDefault(); };
+        if (self.settings.stopPropagation) { e.stopPropagation(); };
+        
         if (diff_position > -5 && diff_position < 5) { /* equivalent to tap */ };
 
         // limit drag
         if (self.current_position > 0) {
-        	self.current_position = 0
+            self.current_position = 0
         };
         if (self.current_position < -scroll_height_diff) {
-        	self.current_position = -scroll_height_diff
+            self.current_position = -scroll_height_diff
         };
 
         processTick();
@@ -132,7 +134,7 @@ ABScroller.prototype.disable = function disable()
 
 ABScroller.prototype.invertDirection = function invertDirection() 
 {
-	if (this.invert_direction === true) {
+    if (this.invert_direction === true) {
         this.invert_direction = false;
     }
     else {
