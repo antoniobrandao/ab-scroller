@@ -1,6 +1,6 @@
 {
   "name": "ab-scroller",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimal vanilla touch scroller",
   "main": "index.js",
   "keywords": [
