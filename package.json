@@ -1,1 +1,24 @@
-{"name":"ab-scroller","version":"0.0.0","description":"Simple touch-enabled scroller","main":"index.js","keywords":["scroller","touch","simple"],"license":"MIT","author":"Antonio Brandao <antoniobrandaodesign@gmail.com> (http://www.antoniobrandao.com/)","homepage":"https://github.com/antoniobrandao/ab-scroller","repository":{"type":"git","url":"https://github.com/antoniobrandao/ab-scroller"},"bugs":{"url":"https://github.com/antoniobrandao/ab-scroller/issues"}}
+{
+  "name": "ab-scroller",
+  "version": "1.0.0",
+  "description": "Minimal vanilla touch scroller",
+  "main": "index.js",
+  "keywords": [
+    "scroller",
+    "touch",
+    "simple"
+  ],
+  "license": "MIT",
+  "author": "Antonio Brandao <antoniobrandaodesign@gmail.com> (http://www.antoniobrandao.com/)",
+  "homepage": "https://github.com/antoniobrandao/ab-scroller",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antoniobrandao/ab-scroller"
+  },
+  "bugs": {
+    "url": "https://github.com/antoniobrandao/ab-scroller/issues"
+  },
+  "dependencies": {
+    "ab-element": "^1.2.2"
+  }
+}
