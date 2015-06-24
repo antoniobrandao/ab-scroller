@@ -1,3 +1,4 @@
+        alert('touchend');
 'use strict';
 
 var element = require('ab-element');
