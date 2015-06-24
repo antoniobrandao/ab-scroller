@@ -54,9 +54,9 @@ ABScroller.prototype.initVertical = function initVertical()
 
     var processTick = function()
     {
-    	if (this.settings.orientation === 'vertical') {
+    	if (self.settings.orientation === 'vertical') {
         	element.style.transform = 'translate3d(0px, ' + self.current_position + 'px, 0px)';
-	    } else if (this.settings.orientation === 'horizontal') {
+	    } else if (self.settings.orientation === 'horizontal') {
 	        element.style.transform = 'translate3d(' + self.current_position + 'px, 0px, 0px)';
 	    }
     }
