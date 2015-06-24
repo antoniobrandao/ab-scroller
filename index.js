@@ -37,15 +37,17 @@ ABScroller.prototype.initVertical = function initVertical()
     if (this.activated) { this.disable(); };
 
     if (this.settings.orientation === 'vertical') {
-        var direction_property = 'clientY';
+        var direction_property  = 'clientY';
+        var size_property       = 'clientHeight';
     } else if (this.settings.orientation === 'horizontal') {
-        var direction_property = 'clientX';
+        var direction_property  = 'clientX';
+        var size_property       = 'clientHeight';
     }
 
     this.activated = true;
 
     var element = this.settings.element;
-    var scroll_height_diff = element.clientHeight - element.parentNode.clientHeight;
+    var scroll_height_diff = element[size_property] - element.parentNode[size_property];
 
     var start_position;
     var diff_position;
@@ -126,12 +128,11 @@ ABScroller.prototype.initVertical = function initVertical()
 
 ABScroller.prototype.disable = function disable() 
 {
-    this.settings.element.parentNode.removeEventListener('touchstart', touchStart,    false);
-    this.settings.element.parentNode.removeEventListener('touchmove',  touchMove,     false);
-    this.settings.element.parentNode.removeEventListener('touchend',   touchEnd,      false);
+    this.settings.element.parentNode.removeEventListener('touchstart', this.touchListeners[0], false);
+    this.settings.element.parentNode.removeEventListener('touchmove',  this.touchListeners[1], false);
+    this.settings.element.parentNode.removeEventListener('touchend',   this.touchListeners[2], false);
 
     this.touchListeners     = [];
-    this.settings.element   = null;
 };
 
 ABScroller.prototype.invertDirection = function invertDirection() 
